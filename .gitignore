@@ -39,4 +39,4 @@ jspm_packages
 .node_repl_history
 
 # Test functions file
-src/test.js
+# src/test.js
