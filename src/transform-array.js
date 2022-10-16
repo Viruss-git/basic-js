@@ -15,9 +15,8 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function transform(arr) {
   if (!Array.isArray(arr)) {
-    throw Error(`'arr' parameter must be an instance of the Array!`);
+    throw new Error(`'arr' parameter must be an instance of the Array!`);
   }
-
 
   let newArray = [];
 
@@ -36,26 +35,26 @@ function transform(arr) {
 
     switch (arr[i]) {
       case '--double-next':
-        doubleNext(arr[i + 1]);
-        break;
-
-      case '--double-prev':
-        if (arr[i - 2] == '--double-next') {
-          console.log('Contine...1');
-        } else if (arr[i - 2] == '--discard-next') {
-          console.log('Contine...2');
-        } else {
-          doublePrev(arr[i - 1]);
+        if (i + 1 < arr.length) {
+          doubleNext(arr[i + 1]);
         }
         break;
 
+      case '--double-prev':
+        if (i > 0) {
+          if (arr[i - 2] == '--double-next' || arr[i - 2] == '--discard-next') {
+            console.log('Contine...1');
+          } else {
+            doublePrev(arr[i - 1]);
+          }
+        }
+        break;
       case '--discard-next':
         i = i + 1;
         break;
 
       case '--discard-prev':
         if (arr[i - 2] == '--discard-next') {
-          console.log('Contine...3');
         } else if (arr[i - 2] == '--double-next') {
           newArray.pop();
           newArray.pop();
@@ -72,7 +71,6 @@ function transform(arr) {
   }
 
   return newArray;
-
 
 }
 

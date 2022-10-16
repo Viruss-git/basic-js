@@ -82,14 +82,14 @@ function transform(arr) {
 
         switch (arr[i]) {
             case '--double-next':
-                doubleNext(arr[i + 1]);
+                if (i + 1 < arr.length) {
+                    doubleNext(arr[i + 1]);
+                }
                 break;
 
             case '--double-prev':
 
-                if () { // Продолжить...
-
-                } else {
+                if (i !== 0) {
                     if (arr[i - 2] == '--double-next') {
                         console.log('Contine...1');
                     } else if (arr[i - 2] == '--discard-next') {
@@ -98,7 +98,6 @@ function transform(arr) {
                         doublePrev(arr[i - 1]);
                     }
                 }
-
                 break;
 
             case '--discard-next':
